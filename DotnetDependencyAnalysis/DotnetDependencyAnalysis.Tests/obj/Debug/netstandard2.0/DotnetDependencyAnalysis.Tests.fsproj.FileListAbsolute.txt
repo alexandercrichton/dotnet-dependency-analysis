@@ -1,0 +1,6 @@
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netstandard2.0\DotnetDependencyAnalysis.Tests.deps.json
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netstandard2.0\DotnetDependencyAnalysis.Tests.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netstandard2.0\DotnetDependencyAnalysis.Tests.pdb
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\obj\Debug\netstandard2.0\DotnetDependencyAnalysis.Tests.fsprojResolveAssemblyReference.cache
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\obj\Debug\netstandard2.0\DotnetDependencyAnalysis.Tests.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\obj\Debug\netstandard2.0\DotnetDependencyAnalysis.Tests.pdb
