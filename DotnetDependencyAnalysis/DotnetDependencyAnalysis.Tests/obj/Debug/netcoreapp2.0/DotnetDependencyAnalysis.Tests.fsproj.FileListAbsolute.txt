@@ -1,0 +1,11 @@
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.deps.json
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.runtimeconfig.json
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.runtimeconfig.dev.json
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\bin\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.pdb
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\obj\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.fsprojResolveAssemblyReference.cache
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\obj\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.dll
+C:\Dev\dotnet-dependency-analysis\DotnetDependencyAnalysis\DotnetDependencyAnalysis.Tests\obj\Debug\netcoreapp2.0\DotnetDependencyAnalysis.Tests.pdb
