@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Tools.fs" />
+    <Compile Include="Rop.fs" />
+    <Compile Include="DomainTypes.fs" />
+    <Compile Include="Loading.fs" />
+    <Compile Include="Dgml.fs" />
+    <Compile Include="Analysis.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Script.fsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.3.0" />
   </ItemGroup>
 
