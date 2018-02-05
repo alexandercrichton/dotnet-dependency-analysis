@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Tools.fs" />
     <Compile Include="Rop.fs" />
     <Compile Include="DomainTypes.fs" />
     <Compile Include="Loading.fs" />

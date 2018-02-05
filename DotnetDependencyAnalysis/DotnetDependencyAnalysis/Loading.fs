@@ -8,7 +8,10 @@ module Loading =
 
     open DomainTypes
     open System
-    open Tools
+
+    let trimLastDot (str: string) =
+        let index = str.LastIndexOf('.')
+        str.Substring(0, index)
 
     let private parseXml xml =
         try 
@@ -44,11 +47,11 @@ module Loading =
             |> Seq.find (fun a -> a.Name.LocalName = "Include")
             |> (fun a -> a.Value.Split('\\'))
             |> Array.last
-            |> Tools.trimFromEnd ".csproj"
+            |> trimLastDot
             |> ProjectDependency
         )
 
-    let private foldListOfResults<'a, 'b> : ( Rop.Result<'a, 'b> list -> Rop.Result<'a list, 'b>) =
+    let private foldListOfResults<'a, 'b> : (Rop.Result<'a, 'b> list -> Rop.Result<'a list, 'b>) =
         List.fold (fun a b -> Rop.bind2 (fun a b -> a::b) b a) Rop.id
 
     let private nugetDependencyFromElement (element: XElement) nameAttribute versionAttribute =
@@ -101,7 +104,7 @@ module Loading =
         )
 
     let private loadProject (projectFile: FileInfo) =
-        let projectName = projectFile.Name |> Tools.trimFromEnd ".csproj"
+        let projectName = projectFile.Name |> trimLastDot
 
         let projectXml = 
             projectFile.FullName 
@@ -127,13 +130,15 @@ module Loading =
         )
     
     let private loadProjects (solutionFile: FileInfo) =
-        solutionFile.Directory.GetFiles("*.csproj", SearchOption.AllDirectories)
-        |> List.ofArray
+        let allfiles =
+            (solutionFile.Directory.GetFiles("*.csproj", SearchOption.AllDirectories) |> List.ofArray)
+            @ (solutionFile.Directory.GetFiles("*.fsproj", SearchOption.AllDirectories) |> List.ofArray)
+        allfiles
         |> List.map loadProject
         |> foldListOfResults
 
     let private loadSolution (solutionFile: FileInfo) =
-        let solutionName = solutionFile.Name |> Tools.trimFromEnd ".sln"
+        let solutionName = solutionFile.Name |> trimLastDot
         loadProjects solutionFile
         |> Rop.map (fun projects -> { name = solutionName; projects = projects })
         

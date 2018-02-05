@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="LoadingTestFiles\FsharpDotnetCoreSolution - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="DgmlTests.fs" />
     <Compile Include="LoadingTests.fs" />
   </ItemGroup>
@@ -51,6 +55,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoadingTestFiles\DotnetCoreSolution\DotnetCoreSolution\DotnetCoreSolution.csproj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LoadingTestFiles\FsharpDotnetCoreSolution\FsharpDotnetCoreSolution.Dependency\FsharpDotnetCoreSolution.Dependency.fsproj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LoadingTestFiles\FsharpDotnetCoreSolution\FsharpDotnetCoreSolution.sln">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LoadingTestFiles\FsharpDotnetCoreSolution\FsharpDotnetCoreSolution\FsharpDotnetCoreSolution.fsproj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

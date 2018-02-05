@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsharpDotnetCoreSolution", "FsharpDotnetCoreSolution\FsharpDotnetCoreSolution.fsproj", "{7A722CE8-D202-433E-B703-E55FE4126FC1}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsharpDotnetCoreSolution.Dependency", "FsharpDotnetCoreSolution.Dependency\FsharpDotnetCoreSolution.Dependency.fsproj", "{24225189-8740-4478-8F00-C7B998F757D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A722CE8-D202-433E-B703-E55FE4126FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A722CE8-D202-433E-B703-E55FE4126FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A722CE8-D202-433E-B703-E55FE4126FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A722CE8-D202-433E-B703-E55FE4126FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24225189-8740-4478-8F00-C7B998F757D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24225189-8740-4478-8F00-C7B998F757D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24225189-8740-4478-8F00-C7B998F757D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24225189-8740-4478-8F00-C7B998F757D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49361899-FAB4-4345-9C0E-3FF137861AE0}
+	EndGlobalSection
+EndGlobal

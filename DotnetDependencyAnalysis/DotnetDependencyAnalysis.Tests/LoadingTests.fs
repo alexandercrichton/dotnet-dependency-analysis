@@ -84,4 +84,34 @@ module LoadingTests =
         ]
 
         Assert.Equal(expected, result)
+    
+    [<Fact>]
+    let ``Fsharp NET core solution`` () =
+        let result = loadSolutionsFromTestDirectory "FsharpDotnetCoreSolution"
+
+        let expected =  Ok [
+            {
+                name = "FsharpDotnetCoreSolution";
+                projects = [
+                    {
+                        name = "FsharpDotnetCoreSolution.Dependency";
+                        frameworks = [NetStandard];
+                        dependencies = [];
+                    };
+                    {
+                        name = "FsharpDotnetCoreSolution";
+                        frameworks = [NetCore];
+                        dependencies = [
+                            ProjectDependency "FsharpDotnetCoreSolution.Dependency";
+                            NugetDependency {
+                                name = "Newtonsoft.Json";
+                                version = "10.0.3";
+                            }
+                        ];
+                    }
+                ];
+            }
+        ]
+
+        Assert.Equal(expected, result)
         
