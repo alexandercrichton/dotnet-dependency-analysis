@@ -106,7 +106,11 @@ module LoadingTests =
                             NugetDependency {
                                 name = "Newtonsoft.Json";
                                 version = "10.0.3";
-                            }
+                            };
+                            NugetDependency {
+                                name = "FSharp.Core";
+                                version = "4.3.0";
+                            };
                         ];
                     }
                 ];

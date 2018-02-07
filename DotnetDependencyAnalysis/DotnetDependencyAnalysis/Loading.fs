@@ -54,13 +54,13 @@ module Loading =
     let private foldListOfResults<'a, 'b> : (Rop.Result<'a, 'b> list -> Rop.Result<'a list, 'b>) =
         List.fold (fun a b -> Rop.bind2 (fun a b -> a::b) b a) Rop.id
 
-    let private nugetDependencyFromElement (element: XElement) nameAttribute versionAttribute =
-        let attributeValue attributeName =
+    let private nugetDependencyFromElement (element: XElement) nameAttributes versionAttribute =
+        let attributeValue attributeNames =
             element.Attributes() 
-            |> Seq.find (fun a -> a.Name.LocalName = attributeName) 
+            |> Seq.find (fun a -> List.contains a.Name.LocalName attributeNames) 
             |> (fun a -> a.Value)
-        let nugetName = attributeValue nameAttribute
-        let nugetVersion = attributeValue versionAttribute
+        let nugetName = attributeValue nameAttributes
+        let nugetVersion = attributeValue [versionAttribute]
         NugetDependency { name = nugetName; version = nugetVersion }
         
     let private loadNugetDependencies projectName (projectFile: FileInfo) (projectXml: XDocument option) =
@@ -79,7 +79,7 @@ module Loading =
                     nugetsXml.XPathSelectElements("//package")
                     |> List.ofSeq
                     |> List.map (fun element ->
-                        nugetDependencyFromElement element "id" "version"
+                        nugetDependencyFromElement element ["id"] "version"
                     )
                     |> Rop.Ok
                 )
@@ -93,7 +93,7 @@ module Loading =
                 projectXml.XPathSelectElements("//PackageReference")
                 |> List.ofSeq
                 |> List.map (fun element ->
-                    nugetDependencyFromElement element "Include" "Version"
+                    nugetDependencyFromElement element ["Include"; "Update"] "Version"
                 )
             )
             |> Option.defaultValue []
