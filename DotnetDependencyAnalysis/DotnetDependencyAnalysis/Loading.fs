@@ -130,9 +130,14 @@ module Loading =
         )
     
     let private loadProjects (solutionFile: FileInfo) =
+        let loadFilesInSolution pattern =
+            solutionFile.Directory.GetFiles(pattern, SearchOption.AllDirectories) 
+            |> List.ofArray
+
         let allfiles =
-            (solutionFile.Directory.GetFiles("*.csproj", SearchOption.AllDirectories) |> List.ofArray)
-            @ (solutionFile.Directory.GetFiles("*.fsproj", SearchOption.AllDirectories) |> List.ofArray)
+            ["*.csproj"; "*.fsproj"]
+            |> List.collect loadFilesInSolution
+
         allfiles
         |> List.map loadProject
         |> foldListOfResults

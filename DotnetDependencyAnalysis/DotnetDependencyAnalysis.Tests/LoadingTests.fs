@@ -26,6 +26,19 @@ module LoadingTests =
         Assert.Equal(expected, result)
     
     [<Fact>]
+    let ``Empty solution`` () =
+        let result = loadSolutionsFromTestDirectory "EmptySolution"
+
+        let expected =  Ok [
+            {
+                name = "EmptySolution";
+                projects = [];
+            }
+        ]
+
+        Assert.Equal(expected, result)
+    
+    [<Fact>]
     let ``Csharp NET framework solution`` () =
         let result = loadSolutionsFromTestDirectory "DotnetFrameworkSolution"
 

@@ -19,6 +19,9 @@
     <Content Include="LoadingTestFiles\EmptyDirectory\placeholdertxt.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="LoadingTestFiles\EmptySolution\EmptySolution.sln">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
