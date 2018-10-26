@@ -9,7 +9,7 @@ module Loading =
     open DomainTypes
     open System
 
-    let trimLastDot (str: string) =
+    let private trimLastDot (str: string) =
         let index = str.LastIndexOf('.')
         str.Substring(0, index)
 
@@ -152,9 +152,5 @@ module Loading =
             directory.GetFiles("*.sln", SearchOption.AllDirectories)
             |> List.ofArray
         match solutionFiles with
-        | [] ->
-            Rop.Fail [NoSolutionsFound]
-        | solutionFiles ->
-            solutionFiles 
-            |> List.map loadSolution
-            |> foldListOfResults
+        | [] -> Rop.Fail [NoSolutionsFound]
+        | solutionFiles -> solutionFiles |> List.map loadSolution |> foldListOfResults

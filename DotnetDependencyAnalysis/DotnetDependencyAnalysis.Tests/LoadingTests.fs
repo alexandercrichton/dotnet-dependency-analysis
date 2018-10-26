@@ -16,32 +16,28 @@ module LoadingTests =
         absoluteDirectoryPath directory
         |> (fun directory -> new DirectoryInfo(directory))
         |> Loading.loadSolutions
-    
-    [<Fact>]
-    let ``Empty directory`` () =
-        let result = loadSolutionsFromTestDirectory "EmptyDirectory"
 
-        let expected =  Fail [NoSolutionsFound]
-
+    let testDirectory directory expected =
+        let result = loadSolutionsFromTestDirectory directory
         Assert.Equal(expected, result)
     
     [<Fact>]
+    let ``Empty directory`` () =
+        let expected =  Fail [NoSolutionsFound]
+        testDirectory "EmptyDirectory" expected
+    
+    [<Fact>]
     let ``Empty solution`` () =
-        let result = loadSolutionsFromTestDirectory "EmptySolution"
-
         let expected =  Ok [
             {
                 name = "EmptySolution";
                 projects = [];
             }
         ]
-
-        Assert.Equal(expected, result)
+        testDirectory "EmptySolution" expected
     
     [<Fact>]
     let ``Csharp NET framework solution`` () =
-        let result = loadSolutionsFromTestDirectory "DotnetFrameworkSolution"
-
         let expected =  Ok [
             {
                 name = "DotnetFrameworkSolution";
@@ -65,13 +61,11 @@ module LoadingTests =
                 ];
             }
         ]
-
-        Assert.Equal(expected, result)
+        
+        testDirectory "DotnetFrameworkSolution" expected
     
     [<Fact>]
     let ``Csharp NET core solution`` () =
-        let result = loadSolutionsFromTestDirectory "DotnetCoreSolution"
-
         let expected =  Ok [
             {
                 name = "DotnetCoreSolution";
@@ -95,13 +89,11 @@ module LoadingTests =
                 ];
             }
         ]
-
-        Assert.Equal(expected, result)
+        
+        testDirectory "DotnetCoreSolution" expected
     
     [<Fact>]
     let ``Fsharp NET core solution`` () =
-        let result = loadSolutionsFromTestDirectory "FsharpDotnetCoreSolution"
-
         let expected =  Ok [
             {
                 name = "FsharpDotnetCoreSolution";
@@ -129,6 +121,6 @@ module LoadingTests =
                 ];
             }
         ]
-
-        Assert.Equal(expected, result)
+        
+        testDirectory "FsharpDotnetCoreSolution" expected
         
