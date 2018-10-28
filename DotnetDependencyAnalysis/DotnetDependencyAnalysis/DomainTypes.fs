@@ -27,7 +27,7 @@ module DomainTypes =
     projects: Project list
   }
 
-  type Message =
+  type Error =
     | IncorrectArguments
     | InvalidFilterRegex
     | DirectoryDoesNotExist
@@ -35,3 +35,6 @@ module DomainTypes =
     | InvalidProjectXml of string
     | MultipleNugetFilesInProject of string
     | InvalidNugetsXml of string
+
+  type Message =
+    | DuplicateSolution of string

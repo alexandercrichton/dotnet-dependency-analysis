@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="SanitiseTests.fs" />
     <Compile Include="DgmlTests.fs" />
     <Compile Include="LoadingTests.fs" />
   </ItemGroup>

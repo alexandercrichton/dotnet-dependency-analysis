@@ -3,10 +3,10 @@
 open DotnetDependencyAnalysis
 open DotnetDependencyAnalysis.DomainTypes
 open System.IO
+open System.Text.RegularExpressions
 
 module Program =
 
-  open System.Text.RegularExpressions
 
   type Arguments = {
     directory: DirectoryInfo;
@@ -42,9 +42,33 @@ module Program =
     File.WriteAllText(fileName, dgml)
     fileName
 
+  let private run args =
+    Loading.loadSolutions args.directory
+    |> Rop.map (fun solutions -> 
+      let filteredSolutions =
+        match args.filter with
+        | None -> solutions
+        | Some filter -> Filtering.filter filter solutions
+
+      let sanitiseResult = Sanitise.sanitise filteredSolutions
+
+      let outputFileName = 
+        sanitiseResult.solutions
+        |> Dgml.build
+        |> writeDgmlToFile args.directory
+
+      (sanitiseResult.messages, outputFileName)
+    )
+
   let private handleResult = function
-    | Rop.Ok fileName ->
+    | Rop.Ok (messages, fileName) ->
       printfn "Successfully created %A" fileName
+      printfn "Warnings: "
+      for message in messages do
+        match message with
+        | DuplicateSolution solution ->
+          printfn "Duplicate solution: %s" solution
+
     | Rop.Fail messages ->
       printfn "Errors: "
       for message in messages do
@@ -70,15 +94,6 @@ module Program =
     argv 
     |> List.ofArray
     |> parseArguments
-    |> Rop.bind (fun args ->
-      Loading.loadSolutions args.directory
-      |> Rop.map (fun solutions -> 
-        match args.filter with
-        | None -> solutions
-        | Some filter -> Filtering.filter filter solutions
-      )
-      |> Rop.map Dgml.build
-      |> Rop.map (writeDgmlToFile args.directory)
-    )
+    |> Rop.bind run
     |> handleResult
     0
