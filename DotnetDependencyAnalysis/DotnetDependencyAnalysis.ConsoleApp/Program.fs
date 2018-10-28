@@ -2,28 +2,45 @@
 
 open DotnetDependencyAnalysis
 open DotnetDependencyAnalysis.DomainTypes
-open DotnetDependencyAnalysis.Analysis
 open System.IO
 
 module Program =
-    
-  let private directoryFromArguments = function
-    | [directory] -> 
-      if Directory.Exists directory then 
-        Rop.Ok (new DirectoryInfo(directory))
-      else
-        Rop.Fail [DirectoryDoesNotExist]
-    | [] -> 
-      Rop.Fail [MissingDirectoryArgument]
-    | _ -> 
-      Rop.Fail [TooManyArguments]
 
-  type FileName = FileName of string
+  open System.Text.RegularExpressions
+
+  type Arguments = {
+    directory: DirectoryInfo;
+    filter: Regex option;
+  }
     
-  let private outputDgml (directory: DirectoryInfo) dgml =
+  let private parseArguments = function
+    | [] -> 
+      Rop.Fail [IncorrectArguments]
+
+    | directory::xs -> 
+      if not(Directory.Exists directory) then
+        Rop.Fail [DirectoryDoesNotExist]
+      else 
+        let directory = new DirectoryInfo(directory)
+
+        let filter = 
+          match xs with
+          | [] -> None |> Rop.Ok
+          | filter::_ ->
+            try
+              new Regex(filter) |> Some |> Rop.Ok
+            with
+            | _ -> Rop.Fail [InvalidFilterRegex]
+
+        filter
+        |> Rop.map (fun filter ->
+          { directory = directory; filter = filter }
+        )
+
+  let private writeDgmlToFile (directory: DirectoryInfo) dgml =
     let fileName = sprintf "%s/output.dgml" directory.FullName
     File.WriteAllText(fileName, dgml)
-    FileName fileName
+    fileName
 
   let private handleResult = function
     | Rop.Ok fileName ->
@@ -32,13 +49,13 @@ module Program =
       printfn "Errors: "
       for message in messages do
         match message with 
-        | TooManyArguments _ -> 
-          printfn "Too many arguments"
-        | MissingDirectoryArgument _ ->
-          printfn "Missing directory argument"
-        | DirectoryDoesNotExist _ ->
+        | IncorrectArguments ->
+          printfn "Incorrect arguments"
+        | InvalidFilterRegex ->
+          printfn "Invalid filter regex"
+        | DirectoryDoesNotExist ->
           printfn "Directory does not exist"
-        | NoSolutionsFound _ ->
+        | NoSolutionsFound ->
           printfn "No solutions found in directory"
         | InvalidProjectXml projectFile ->
           printfn "Invalid XML in project file: %s" projectFile
@@ -46,17 +63,22 @@ module Program =
           printfn "Multiple nuget files found in project: %s" project
         | InvalidNugetsXml nugetsFile ->
           printfn "Invalid XML in nuget packages file: %s" nugetsFile
-      printfn "Usage: <exe> \"<solution-directory>\""
+      printfn "Usage: <exe> <solution-directory> [<filter-regex>]"
             
   [<EntryPoint>]
   let main argv = 
     argv 
     |> List.ofArray
-    |> directoryFromArguments
-    |> Rop.bind (fun directory ->
-      directory
-      |> analyse 
-      |> Rop.bind (outputDgml directory >> Rop.Ok)
+    |> parseArguments
+    |> Rop.bind (fun args ->
+      Loading.loadSolutions args.directory
+      |> Rop.map (fun solutions -> 
+        match args.filter with
+        | None -> solutions
+        | Some filter -> Filtering.filter filter solutions
+      )
+      |> Rop.map Dgml.build
+      |> Rop.map (writeDgmlToFile args.directory)
     )
     |> handleResult
     0

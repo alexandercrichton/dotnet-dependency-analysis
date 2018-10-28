@@ -7,7 +7,6 @@ module Loading =
   open System.Xml.XPath
 
   open DomainTypes
-  open System
 
   let private trimLastDot (str: string) =
     let index = str.LastIndexOf('.')

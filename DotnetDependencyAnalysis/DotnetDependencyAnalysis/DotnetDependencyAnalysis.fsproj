@@ -7,10 +7,9 @@
   <ItemGroup>
     <Compile Include="Rop.fs" />
     <Compile Include="DomainTypes.fs" />
-    <Compile Include="Loading.fs" />
     <Compile Include="Filtering.fs" />
+    <Compile Include="Loading.fs" />
     <Compile Include="Dgml.fs" />
-    <Compile Include="Analysis.fs" />
   </ItemGroup>
 
   <ItemGroup>

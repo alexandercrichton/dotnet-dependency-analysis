@@ -5,7 +5,7 @@ module Filtering =
   open DomainTypes
   open System.Text.RegularExpressions
 
-  let filter solutions (regex: Regex) =
+  let filter (regex: Regex) solutions =
     solutions |> List.choose (fun solution ->
       if regex.IsMatch(solution.name) |> not then
         None

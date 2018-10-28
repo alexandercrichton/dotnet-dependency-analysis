@@ -8,16 +8,16 @@ module Rop =
 
   let id = Ok []
 
-  let bind binder = function
-    | Ok x -> binder x
+  let bind f = function
+    | Ok x -> f x
     | Fail messages -> Fail messages
 
-  let bind2 binder a b  =
+  let bind2 f a b  =
     match a, b with
-    | Ok a, Ok b -> Ok (binder a b)
+    | Ok a, Ok b -> Ok (f a b)
     | Ok _, Fail messages -> Fail messages
     | Fail messages, Ok _ -> Fail messages
     | Fail a, Fail b -> Fail (b @ a)
 
-  let map mapping result = 
-    result |> bind (fun x -> x |> mapping |> Ok)
+  let map f =
+    bind (fun x -> x |> f |> Ok)

@@ -28,8 +28,8 @@ module DomainTypes =
   }
 
   type Message =
-    | TooManyArguments
-    | MissingDirectoryArgument
+    | IncorrectArguments
+    | InvalidFilterRegex
     | DirectoryDoesNotExist
     | NoSolutionsFound
     | InvalidProjectXml of string
